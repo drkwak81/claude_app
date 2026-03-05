@@ -35,18 +35,20 @@ export default function LessonPage({ markLessonViewed }) {
         <h1>{topic.title}</h1>
       </header>
 
-      <section className="lesson-video">
-        <h2>🎬 동영상으로 배우기</h2>
-        <div className="video-container">
-          <iframe
-            src={`https://www.youtube.com/embed/${topic.videoId}`}
-            title={topic.videoTitle}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-        <p className="video-note">💡 영상을 보고 아래 설명도 함께 읽어보세요!</p>
-      </section>
+      {topic.videoId && (
+        <section className="lesson-video">
+          <h2>🎬 동영상으로 배우기</h2>
+          <div className="video-container">
+            <iframe
+              src={`https://www.youtube.com/embed/${topic.videoId}`}
+              title={topic.videoTitle}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+          <p className="video-note">💡 영상을 보고 아래 설명도 함께 읽어보세요!</p>
+        </section>
+      )}
 
       <section className="lesson-content">
         <h2>📝 개념 설명</h2>
