@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import curriculum from '../data/curriculum';
 import GradeCard from '../components/GradeCard';
 
@@ -7,6 +7,35 @@ const firstGrade = grades[0];
 const firstTopic = firstGrade?.topics[0];
 
 export default function HomePage({ getGradeCompletionPercent }) {
+  const navigate = useNavigate();
+
+  const features = [
+    {
+      icon: '📖',
+      title: '쉬운 설명',
+      desc: '개념을 확실하게 이해할 수 있는 친절한 설명',
+      path: `/lesson/${firstGrade?.id}/${firstTopic?.id}`,
+    },
+    {
+      icon: '🎬',
+      title: '동영상 학습',
+      desc: '영상으로 더 쉽게 이해해요',
+      path: `/lesson/${firstGrade?.id}/${firstTopic?.id}`,
+    },
+    {
+      icon: '✏️',
+      title: '재미있는 퀴즈',
+      desc: '배운 내용을 퀴즈로 확인해요',
+      path: `/quiz/${firstGrade?.id}/${firstTopic?.id}`,
+    },
+    {
+      icon: '🎮',
+      title: '수학 게임',
+      desc: '게임하면서 수학 실력 UP!',
+      path: '/games',
+    },
+  ];
+
   return (
     <div className="home-page">
       <header className="hero">
@@ -25,26 +54,20 @@ export default function HomePage({ getGradeCompletionPercent }) {
       </section>
 
       <section className="home-features">
-        <Link to={`/lesson/${firstGrade?.id}/${firstTopic?.id}`} className="feature-card feature-card-link">
-          <span className="feature-icon">📖</span>
-          <h3>쉬운 설명</h3>
-          <p>개념을 확실하게 이해할 수 있는 친절한 설명</p>
-        </Link>
-        <Link to={`/lesson/${firstGrade?.id}/${firstTopic?.id}`} className="feature-card feature-card-link">
-          <span className="feature-icon">🎬</span>
-          <h3>동영상 학습</h3>
-          <p>영상으로 더 쉽게 이해해요</p>
-        </Link>
-        <Link to={`/quiz/${firstGrade?.id}/${firstTopic?.id}`} className="feature-card feature-card-link">
-          <span className="feature-icon">✏️</span>
-          <h3>재미있는 퀴즈</h3>
-          <p>배운 내용을 퀴즈로 확인해요</p>
-        </Link>
-        <Link to="/games" className="feature-card feature-card-link">
-          <span className="feature-icon">🎮</span>
-          <h3>수학 게임</h3>
-          <p>게임하면서 수학 실력 UP!</p>
-        </Link>
+        {features.map((f) => (
+          <div
+            key={f.title}
+            className="feature-card feature-card-link"
+            onClick={() => navigate(f.path)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => { if (e.key === 'Enter') navigate(f.path); }}
+          >
+            <span className="feature-icon">{f.icon}</span>
+            <h3>{f.title}</h3>
+            <p>{f.desc}</p>
+          </div>
+        ))}
       </section>
     </div>
   );
