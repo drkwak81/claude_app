@@ -18,7 +18,7 @@ export default function App() {
   } = useProgress();
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/claude_app">
       <div className="app">
         <Navbar totalStars={getTotalStars()} />
         <main className="main-content">
