@@ -1,7 +1,10 @@
+import { Link } from 'react-router-dom';
 import curriculum from '../data/curriculum';
 import GradeCard from '../components/GradeCard';
 
 const grades = Object.values(curriculum);
+const firstGrade = grades[0];
+const firstTopic = firstGrade?.topics[0];
 
 export default function HomePage({ getGradeCompletionPercent }) {
   return (
@@ -22,26 +25,26 @@ export default function HomePage({ getGradeCompletionPercent }) {
       </section>
 
       <section className="home-features">
-        <div className="feature-card">
+        <Link to={`/lesson/${firstGrade?.id}/${firstTopic?.id}`} className="feature-card feature-card-link">
           <span className="feature-icon">📖</span>
           <h3>쉬운 설명</h3>
           <p>개념을 확실하게 이해할 수 있는 친절한 설명</p>
-        </div>
-        <div className="feature-card">
+        </Link>
+        <Link to={`/lesson/${firstGrade?.id}/${firstTopic?.id}`} className="feature-card feature-card-link">
           <span className="feature-icon">🎬</span>
           <h3>동영상 학습</h3>
           <p>영상으로 더 쉽게 이해해요</p>
-        </div>
-        <div className="feature-card">
+        </Link>
+        <Link to={`/quiz/${firstGrade?.id}/${firstTopic?.id}`} className="feature-card feature-card-link">
           <span className="feature-icon">✏️</span>
           <h3>재미있는 퀴즈</h3>
           <p>배운 내용을 퀴즈로 확인해요</p>
-        </div>
-        <div className="feature-card">
+        </Link>
+        <Link to="/games" className="feature-card feature-card-link">
           <span className="feature-icon">🎮</span>
           <h3>수학 게임</h3>
           <p>게임하면서 수학 실력 UP!</p>
-        </div>
+        </Link>
       </section>
     </div>
   );
